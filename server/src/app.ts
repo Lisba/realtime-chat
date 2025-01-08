@@ -34,7 +34,7 @@ io.on("connection", (socket) => {
 
 
 app.get('/test', (_req, res) => {
-  res.send('Hello World from chat with node, ts and socket.io is working!');
+  res.send('The chat with node, ts and socket.io is working!');
 });
 
 server.listen(PORT, () => {

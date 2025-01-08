@@ -1,9 +1,9 @@
-import "./App.css";
-import io from "socket.io-client";
 import { useState } from "react";
+import io from "socket.io-client";
 import Chat from "./components/chat";
+import "./App.css";
 
-const socket = io("http://localhost:3001");
+const socket = io(import.meta.env.VITE_API_URL);
 
 function App() {
   const [username, setUsername] = useState("");
