@@ -7,7 +7,6 @@ dotenv.config();
 
 const PORT = process.env.PORT
 const ORIGIN_URL = process.env.ORIGIN_URL
-console.log(process.env)
 
 const app = express();
 app.use(cors());
