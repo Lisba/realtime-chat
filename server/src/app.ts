@@ -3,10 +3,10 @@ import { createServer } from 'node:http';
 import { Server } from "socket.io";
 import cors from "cors";
 
-const port = 3001;
+const PORT = 3001;
+
 const app = express();
 app.use(cors());
-
 const server = createServer(app);
 
 const io = new Server(server, {
@@ -17,11 +17,8 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket) => {
-  console.log(`User Connected: ${socket.id}`);
-
   socket.on("join_room", (data) => {
     socket.join(data);
-    console.log(`User with ID: ${socket.id} joined room: ${data}`);
   });
 
   socket.on("send_message", (data) => {
@@ -29,7 +26,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
-    console.log("User Disconnected", socket.id);
   });
 });
 
@@ -38,6 +34,6 @@ app.get('/test', (_req, res) => {
   res.send('Hello World from chat with node, ts and socket.io is working!');
 });
 
-server.listen(port, () => {
-  return console.log(`Express is listening at http://localhost:${port}`);
+server.listen(PORT, () => {
+  return console.log(`Express is listening at http://localhost:${PORT}`);
 });
