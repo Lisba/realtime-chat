@@ -3,7 +3,7 @@ import { createServer } from 'node:http';
 import { Server } from "socket.io";
 import cors from "cors";
 
-const port = 3000;
+const port = 3001;
 const app = express();
 app.use(cors());
 
@@ -11,7 +11,7 @@ const server = createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "http://localhost:5173",
     methods: ["GET", "POST"],
   },
 });
@@ -34,8 +34,8 @@ io.on("connection", (socket) => {
 });
 
 
-app.get('/test', (req, res) => {
-  res.send('Hello World! TS! Working!');
+app.get('/test', (_req, res) => {
+  res.send('Hello World from chat with node, ts and socket.io is working!');
 });
 
 server.listen(port, () => {

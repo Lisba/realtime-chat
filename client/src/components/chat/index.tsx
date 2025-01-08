@@ -1,32 +1,42 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, FC } from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
+import type {Message} from "../../types/globalTypes";
+import {Socket} from "socket.io-client";
 
-function Chat({ socket, username, room }) {
+type ChatProps = {
+  socket: Socket,
+  username: string,
+  room: string
+}
+
+const Chat: FC<ChatProps> = ({ socket, username, room }) => {
   const [currentMessage, setCurrentMessage] = useState("");
-  const [messageList, setMessageList] = useState([]);
+  const [messageList, setMessageList] = useState<Message[]>([]);
 
-  const sendMessage = async () => {
-    if (currentMessage !== "") {
+  const sendMessage = () => {
+    if (currentMessage) {
       const messageData = {
         room: room,
         author: username,
         message: currentMessage,
-        time:
-          new Date(Date.now()).getHours() +
-          ":" +
-          new Date(Date.now()).getMinutes(),
+        time: `${new Date(Date.now()).getHours()}:${new Date(Date.now()).getMinutes()}`
       };
-
-      await socket.emit("send_message", messageData);
+      socket.emit("send_message", messageData);
       setMessageList((list) => [...list, messageData]);
       setCurrentMessage("");
     }
   };
 
   useEffect(() => {
-    socket.on("receive_message", (data) => {
+    const handleReceiveMessage = (data: Message) => {
       setMessageList((list) => [...list, data]);
-    });
+    };
+    
+    socket.on("receive_message", handleReceiveMessage);
+
+    return () => {
+      socket.off("receive_message", handleReceiveMessage);
+    };
   }, [socket]);
 
   return (
@@ -64,8 +74,10 @@ function Chat({ socket, username, room }) {
           onChange={(event) => {
             setCurrentMessage(event.target.value);
           }}
-          onKeyPress={(event) => {
-            event.key === "Enter" && sendMessage();
+          onKeyUp={(event) => {
+            if(event.key === "Enter") {
+              sendMessage();
+            }
           }}
         />
         <button onClick={sendMessage}>&#9658;</button>
