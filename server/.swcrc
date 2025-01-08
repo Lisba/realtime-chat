@@ -1,0 +1,17 @@
+{
+  "jsc": {
+    "parser": {
+      "syntax": "typescript",
+      "tsx": false
+    },
+    "target": "es2020",
+    "transform": {
+      "decoratorMetadata": false,
+      "legacyDecorator": false
+    }
+  },
+  "module": {
+    "type": "es6"
+  },
+  "sourceMaps": true
+}
