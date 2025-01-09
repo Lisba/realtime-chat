@@ -1,10 +1,17 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700");
 
+:root {
+  --main-color: #2a7ea5;
+  --main-hover-color: #236d90;
+  --bg-color: #fff;
+  --font-main-color: #212121;
+}
+
 .App {
   width: 100vw;
   height: 100vh;
-  background: #fff;
-  color: #212121;
+  background: var(--bg-color);
+  color: var(--font-main-color);
   font-family: "Open Sans", sans-serif;
   display: grid;
   place-items: center;
@@ -29,9 +36,11 @@ body {
   width: 210px;
   height: 40px;
   margin: 7px;
-  border: 2px solid #43a047;
-  border-radius: 5px;
   padding: 5px;
+  border: 2px solid var(--main-color);
+  border-radius: 5px;
+  background-color: var(--bg-color);
+  color: var(--font-main-color);
   font-size: 16px;
 }
 
@@ -43,13 +52,13 @@ body {
   border-radius: 5px;
   padding: 5px;
   font-size: 16px;
-  background: #43a047;
-  color: #fff;
+  background: var(--main-color);
+  color: var(--bg-color);
   cursor: pointer;
 }
 
 .joinChatContainer button:hover {
-  background: #2e7d32;
+  background: var(--main-hover-color);
 }
 
 .chat-window {
@@ -65,12 +74,11 @@ body {
   border-radius: 6px;
   background: #263238;
   position: relative;
-  cursor: pointer;
 }
 .chat-window .chat-header p {
   display: block;
   padding: 0 1em 0 2em;
-  color: #fff;
+  color: var(--bg-color);
   font-weight: 700;
   line-height: 45px;
 }
@@ -78,7 +86,7 @@ body {
 .chat-window .chat-body {
   height: calc(450px - (45px + 70px));
   border: 1px solid #263238;
-  background: #fff;
+  background: var(--bg-color);
 
   position: relative;
 }
@@ -103,9 +111,9 @@ body {
   height: auto;
   min-height: 40px;
   max-width: 120px;
-  background-color: #43a047;
+  background-color: var(--main-color);
   border-radius: 5px;
-  color: white;
+  color: var(--bg-color);
   display: flex;
   align-items: center;
   margin-right: 5px;
@@ -135,7 +143,7 @@ body {
 
 #other .message-content {
   justify-content: flex-end;
-  background-color: cornflowerblue;
+  background-color: #58657c;
 }
 
 #other .message-meta {
@@ -165,10 +173,11 @@ body {
   flex: 85%;
   border: 0;
   padding: 0 0.7em;
-  font-size: 1em;
   border-right: 1px dotted #607d8b;
-
   outline: none;
+  color: var(--font-main-color);
+  background-color: var(--bg-color);
+  font-size: 1em;
   font-family: "Open Sans", sans-serif;
 }
 
@@ -176,18 +185,23 @@ body {
   border: 0;
   display: grid;
   place-items: center;
+  align-content: center;
   cursor: pointer;
   flex: 15%;
   height: 100%;
   background: transparent;
   outline: none;
   font-size: 25px;
-  color: lightgray;
+  color: var(--main-color);
 }
 
 .chat-window .chat-footer button:hover {
-  color: #43a047;
+  color: var(--main-hover-color);
 }
 .hide {
   opacity: 0 !important;
+}
+
+.followButtonClassName{
+  color: #fff;
 }
