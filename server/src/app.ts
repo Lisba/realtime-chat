@@ -34,9 +34,7 @@ io.on("connection", (socket) => {
 
 
 app.get('/test', (_req, res) => {
-  res.send('The chat with node, ts and socket.io is working!');
+  res.send('The chat server is working!');
 });
 
-server.listen(PORT, () => {
-  return console.log(`Express is listening at http://localhost:${PORT}`);
-});
+server.listen(PORT);

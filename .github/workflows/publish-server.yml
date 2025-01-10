@@ -1,0 +1,20 @@
+name: Deploy server to Render
+run-name: Deploying via Render CLI
+
+on: workflow_dispatch
+
+jobs:
+  Deploy-Render:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Install Render CLI
+          run: |
+            curl -L https://github.com/render-oss/cli/releases/download/v1.1.0/cli_1.1.0_linux_amd64.zip -o render.zip
+            unzip render.zip
+            sudo mv cli_v1.1.0 /usr/local/bin/render
+        - name: Deploy using Render CLI
+          env:
+            RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+            CI: true
+          run: |
+            render deploys create ${{ secrets.RENDER_SERVICE_ID }} --output json --confirm
